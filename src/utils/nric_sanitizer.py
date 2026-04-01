@@ -44,7 +44,7 @@ def redact_nric(text: str, mode: str = "partial") -> Tuple[str, List[str]]:
             return f"{nric[0]}{'*' * 7}{nric[-1]}"
         else:
             # S****567A (show last 3 digits for verification)
-            return f"{nric[0]}{'*' * 4}{nric[4:7]}{nric[-1]}"
+            return f"{nric[0]}{'*' * 4}{nric[5:8]}{nric[-1]}"
     
     redacted_text = NRIC_PATTERN.sub(redact_match, text)
     
