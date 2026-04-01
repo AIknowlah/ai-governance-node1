@@ -161,7 +161,7 @@ I designed 14 adversarial attack scenarios to test the system.
 
 ### Risk Reduction
 - **Before**: Every citizen query = potential PDPA violation
-- **After**: Automated NRIC redaction = 78.6% attack resistance
+- **After**: Automated NRIC redaction = 85.7% attack resistance
 
 ### Scalability
 - Handles 10,000-character inputs without timeout
@@ -217,7 +217,7 @@ This project intentionally focuses on **Node 1 as a proof-of-concept** for three
 #### 1. Validate the Pattern First
 Before building a full 5-node system, I needed to prove:
 - ✅ The "governance-first" approach works in practice
-- ✅ NRIC redaction can achieve 78.6% adversarial resistance
+- ✅ NRIC redaction can achieve 85.7% adversarial resistance
 - ✅ BigQuery audit trails meet PDPA Section 9 (Accountability)
 - ✅ The pattern is documentable and testable
 
