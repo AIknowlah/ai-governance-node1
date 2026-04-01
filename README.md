@@ -1,7 +1,7 @@
 # Building Singapore's First AI Governance Control: A Solo Engineering Case Study
 
 **By Chandhiran**  
-**Role**: Senior AI Governance Engineer & Technical Auditor  
+**Role**: AI Ethics and ETL Enthusiast  
 **Timeline**: March 2026 - April 2026  
 **Tech Stack**: Python, LangGraph, BigQuery, Gemini API, PDPA Compliance Framework
 
