@@ -9,10 +9,32 @@ from typing import Tuple, List
 
 # Singapore NRIC/FIN regex pattern
 # Format: [STFGM]xxxxxxx[A-Z] where x is a digit
+# Now supports: S1234567A, s1234567a, S 1234 567 A, S-1234-567-A
 NRIC_PATTERN = re.compile(
-    r'\b[STFGM]\d{7}[A-Z]\b',
+    r'\b[STFGM][\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?\d[\s\-]?[A-Z]\b',
     re.IGNORECASE
 )
+
+def normalize_nric(nric_text: str) -> str:
+    """
+    Remove spaces and hyphens from NRIC to get canonical form.
+    
+    Args:
+        nric_text: NRIC string potentially with spaces/hyphens
+    
+    Returns:
+        Normalized NRIC (e.g., "S 1234 567 A" -> "S1234567A")
+    
+    Examples:
+        >>> normalize_nric("S 1234 567 A")
+        'S1234567A'
+        >>> normalize_nric("S-1234-567-A")
+        'S1234567A'
+        >>> normalize_nric("S1234567A")
+        'S1234567A'
+    """
+    # Remove all spaces and hyphens, then convert to uppercase
+    return re.sub(r'[\s\-]', '', nric_text).upper()
 
 def redact_nric(text: str, mode: str = "partial") -> Tuple[str, List[str]]:
     """
@@ -36,7 +58,11 @@ def redact_nric(text: str, mode: str = "partial") -> Tuple[str, List[str]]:
     found_nrics = []
     
     def redact_match(match):
-        nric = match.group(0).upper()
+        # Get the matched NRIC (may contain spaces/hyphens)
+        nric_raw = match.group(0)
+        
+        # Normalize it (remove spaces/hyphens, uppercase)
+        nric = normalize_nric(nric_raw)
         found_nrics.append(nric)
         
         if mode == "full":
